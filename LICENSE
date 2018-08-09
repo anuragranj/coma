@@ -1,0 +1,46 @@
+MIT License
+
+Copyright (c) 2018 Anurag Ranjan, Timo Bolkart, Soubhik Sanyal, Michael J. Black and the Max Planck Gesellschaft
+
+Ownership
+The Model and Code contained within this repository
+has been developed at the Max Planck Institute for Intelligent Systems
+(hereinafter "MPI") and is owned by and proprietary material of the Max-Planck-Gesellschaft
+zur Förderung der Wissenschaften e.V. (hereinafter “MPG”; MPI and MPG hereinafter
+collectively “Max-Planck”).
+
+License Grant
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+WARRANTY
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+Publication
+You agree to cite the papers describing the model as specified on the download website.
+This website lists the most up to date bibliographic information on the about page.
+
+Data and Other Dependencies linked to this project
+The data and other dependencies linked to this project are under their own license terms
+which can be found on their respective webpages. The data and other dependencies linked
+to this projects are not covered by this license.
+
+Media projects
+When using the Model in a media project please give credit to Max Planck Institute for
+Intelligent Systems. For example: HumanFlow was used for optical flow estimation courtesy
+of the Max Planck Institute for Intelligent Systems.
