@@ -69,7 +69,7 @@ params['unpool']		 = 'poolwT'
 
 # Architecture.
 params['F_0']            = int(X_train.shape[2])  # Number of graph input features.
-params['F']              = [16, 16, 16, 32]  # Number of graph convolutional filters.
+params['F']              = [16, 24, 32, 32]  # Number of graph convolutional filters.
 params['K']              = [6, 6, 6, 6]  # Polynomial orders.
 params['p']              = p #[4, 4, 4, 4]    # Pooling sizes.
 params['nz']              = [nz]  # Output dimensionality of fully connected layers.

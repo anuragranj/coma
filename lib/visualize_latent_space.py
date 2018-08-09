@@ -51,5 +51,4 @@ def visualize_latent_space(model, facedata, mesh_path=None):
             break
 
         recon_vec = model.decode(latent_vector)
-        #recon_mesh = facedata.vec2mesh(recon_vec)
-        facedata.show_mesh(viewer=viewer, mesh_vecs=outmesh, figsize=(1,1), normalize=False)
+        facedata.show_mesh(viewer=viewer, mesh_vecs=recon_vec, figsize=(1,1))

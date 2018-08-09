@@ -88,12 +88,12 @@ class FaceData(object):
 			mesh.write_ply(filename+'-'+str(i).zfill(3)+'.ply')
 		return 0
 
-	def show_mesh(self, viewer, mesh_vec1, mesh_vec2):
-		mesh1 = Mesh(v=mesh_vec1.reshape((self.n_vertex,3))*self.std + self.mean, f=self.reference_mesh.f)
-		mesh2 = Mesh(v=mesh_vec2.reshape((self.n_vertex,3))*self.std + self.mean, f=self.reference_mesh.f)
-
-		viewer[0][0].set_dynamic_meshes([mesh1])
-		viewer[0][1].set_dynamic_meshes([mesh2])
+	def show_mesh(self, viewer, mesh_vecs, figsize):
+		for i in range(figsize[0]):
+			for j in range(figsize[1]):
+				mesh_vec = mesh_vecs[i*(figsize[0]-1) + j]
+				mesh_mesh = self.vec2mesh(mesh_vec)
+				viewer[i][j].set_dynamic_meshes([mesh_mesh])
 		time.sleep(0.1)    # pause 0.5 seconds
 		return 0
 
