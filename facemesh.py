@@ -97,6 +97,15 @@ class FaceData(object):
 		time.sleep(0.1)    # pause 0.5 seconds
 		return 0
 
+	def get_normalized_meshes(self, mesh_paths):
+		meshes = []
+		for mesh_path in mesh_paths:
+			mesh = Mesh(filename=mesh_path)
+			mesh_v = (mesh.v - self.mean)/self.std
+		meshes.append(mesh_v)
+		return np.array(meshes)
+
+
 def meshPlay(folder,every=100,wait=0.05):
 	files = glob.glob(folder+'/*')
 	files.sort()
