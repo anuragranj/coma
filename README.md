@@ -1,5 +1,7 @@
 # CoMA : Convolutional Mesh Autoencoders
 
+![Generating 3D Faces using Convolutional Mesh Autoencoders](http://coma.is.tue.mpg.de/assets/coma_faces.jpg)
+
 This is an official repository of [Generating 3D Faces using Convolutional Mesh Autoencoders](https://coma.is.tue.mpg.de)
 
 [[Project Page](https://coma.is.tue.mpg.de)][[Arxiv](https://arxiv.org/abs/1807.10267)]
