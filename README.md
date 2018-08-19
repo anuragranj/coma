@@ -1,4 +1,4 @@
-# CoMA: Convolutional Mesh Autoencoders for Generating 3D Faces
+# CoMA: Convolutional Mesh Autoencoders
 
 ![Generating 3D Faces using Convolutional Mesh Autoencoders](http://coma.is.tue.mpg.de/assets/coma_faces.jpg)
 
