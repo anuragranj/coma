@@ -38,8 +38,12 @@ reference_mesh_file = 'data/template.obj'
 facedata = FaceData(nVal=100, train_file=args.data+'/train.npy',
     test_file=args.data+'/test.npy', reference_mesh_file=reference_mesh_file, pca_n_comp=nz)
 
-ds_factors = [4,4,4,4]
+ds_factors = [4,4,4,4]	# Sampling factor of the mesh at each stage of sampling
 print("Generating Transform Matrices ..")
+
+# Generates adjecency matrices A, downsampling matrices D, and upsamling matrices U by sampling
+# the mesh 4 times. Each time the mesh is sampled by a factor of 4
+
 M,A,D,U = mesh_sampling.generate_transform_matrices(facedata.reference_mesh, ds_factors)
 
 A = map(lambda x:x.astype('float32'), A)
