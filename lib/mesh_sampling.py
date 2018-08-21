@@ -217,6 +217,16 @@ def _get_sparse_transform(faces, num_original_verts):
     return (new_faces, mtx)
 
 def generate_transform_matrices(mesh, factors):
+    """Generates len(factors) meshes, each of them is scaled by factors[i] and
+       computes the transformations between them.
+    
+    Returns:
+       M: a set of meshes downsampled from mesh by a factor specified in factors.
+       A: Adjacency matrix for each of the meshes
+       D: Downsampling transforms between each of the meshes
+       U: Upsampling transforms between each of the meshes
+    """
+
     factors = map(lambda x: 1.0/x, factors)
     M,A,D,U = [], [], [], []
     A.append(get_vert_connectivity(mesh.v, mesh.f))
