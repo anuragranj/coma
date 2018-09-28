@@ -37,7 +37,17 @@ To test, specify a name, and data. For example,
 ```bash
 python main.py --data data/sliced --name sliced --mode test
 
-```  
+``` 
+
+## Sampling
+To sample faces from the latent space, specify a model and data. For example,
+```bash
+python main.py --data data/sliced --name sliced --mode latent
+``` 
+A face template pops up. You can then use the keys `qwertyui` to sample faces by moving forward in each of the 8 latent dimensions. Use `asdfghjk` to move backward in the latent space.
+
+For more flexible usage, refer to [lib/visualize_latent_space.py](https://github.com/anuragranj/coma/blob/master/lib/visualize_latent_space.py).
+
 ## Acknowledgements
 We thank [Raffi Enficiaud](https://www.is.mpg.de/person/renficiaud) and [Ahmed Osman](https://ps.is.tuebingen.mpg.de/person/aosman) for pushing the release of [psbody.mesh](https://github.com/MPI-IS/mesh), an essential dependency for this project.
 
