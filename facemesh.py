@@ -29,9 +29,9 @@ class FaceData(object):
 		self.normalize()
 
 	def load(self):
-		self.vertices_train = np.load(self.train_file)
-		self.vertices_train = self.vertices_train[:-self.nVal]
-		self.vertices_val = self.vertices_train[-self.nVal:]
+		vertices_train = np.load(self.train_file)
+		self.vertices_train = vertices_train[:-self.nVal]
+		self.vertices_val = vertices_train[-self.nVal:]
 
 		self.n_vertex = self.vertices_train.shape[1]
 
