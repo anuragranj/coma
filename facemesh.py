@@ -9,7 +9,7 @@ from sklearn.decomposition import PCA
 from tqdm import tqdm
 
 class FaceData(object):
-	def __init__(self, nVal, train_file, test_file, reference_mesh_file,pca_n_comp=8):
+	def __init__(self, nVal, train_file, test_file, reference_mesh_file,pca_n_comp=8, fitpca=False):
 		self.nVal = nVal
 		self.train_file = train_file
 		self.test_file = test_file
@@ -18,18 +18,24 @@ class FaceData(object):
 		self.vertices_test = None
 		self.N = None
 		self.n_vertex = None
+		self.fitpca = fitpca
+		self.mean = None 
+		self.std = None
 
 		self.load()
 		self.reference_mesh = Mesh(filename=reference_mesh_file)
 
-		self.mean = np.mean(self.vertices_train, axis=0)
-		self.std = np.std(self.vertices_train, axis=0)
+		# self.mean = np.mean(self.vertices_train, axis=0)
+		# self.std = np.std(self.vertices_train, axis=0)
 		self.pca = PCA(n_components=pca_n_comp)
 		self.pcaMatrix = None
 		self.normalize()
 
 	def load(self):
 		vertices_train = np.load(self.train_file)
+		self.mean = np.mean(vertices_train, axis=0)
+		self.std = np.std(vertices_train, axis=0)
+
 		self.vertices_train = vertices_train[:-self.nVal]
 		self.vertices_val = vertices_train[-self.nVal:]
 
@@ -50,7 +56,8 @@ class FaceData(object):
 
 		self.N = self.vertices_train.shape[0]
 
-		# self.pca.fit(self.vertices_train)
+		if self.fitpca:
+			self.pca.fit(np.reshape(self.vertices_train, (self.N, self.n_vertex*3) ))
 		# eigenVals = np.sqrt(self.pca.explained_variance_)
 		# self.pcaMatrix = np.dot(np.diag(eigenVals), self.pca.components_)
 		print('Vertices normalized')

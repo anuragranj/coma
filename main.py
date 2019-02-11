@@ -95,8 +95,8 @@ if args.mode in ['test']:
         os.makedirs('results')
     predictions, loss = model.predict(X_test, X_test)
     print("L1 Loss= ", loss)
-    true_loss = np.mean((predictions - facedata.vertices_test)**2)
-    print("L2 loss= ", true_loss)
+    euclidean_loss = np.mean(np.sqrt(np.sum((facedata.std*(predictions-facedata.vertices_test))**2, axis=2)))
+    print("Euclidean loss= ", euclidean_loss)
     np.save('results/'+args.name+'_predictions', predictions)
     if args.viz:
         from psbody.mesh import MeshViewers
