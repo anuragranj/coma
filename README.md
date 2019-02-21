@@ -37,13 +37,19 @@ To test, specify a name, and data. For example,
 ```bash
 python main.py --data data/sliced --name sliced --mode test
 
-``` 
+```
+#### Reproducing results in the paper
+Run the following script. The models are slightly better (~1% on average) than ones reported in the paper.
+
+```bash
+sh generateErrors.sh
+```
 
 ## Sampling
 To sample faces from the latent space, specify a model and data. For example,
 ```bash
 python main.py --data data/sliced --name sliced --mode latent
-``` 
+```
 A face template pops up. You can then use the keys `qwertyui` to sample faces by moving forward in each of the 8 latent dimensions. Use `asdfghjk` to move backward in the latent space.
 
 For more flexible usage, refer to [lib/visualize_latent_space.py](https://github.com/anuragranj/coma/blob/master/lib/visualize_latent_space.py).
