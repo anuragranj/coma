@@ -4,8 +4,9 @@ scikit-learn
 matplotlib
 tqdm
 gensim
-tensorflow-gpu==1.3.0
+tensorflow-gpu
 jupyter
 ipython
-opendr
+git+https://github.com/dawars/opendr/#subdirectory=chumpy
+git+https://github.com/dawars/opendr/#subdirectory=opendr
 readchar

@@ -28,28 +28,27 @@ parser.add_argument('--loss', default='l1', help='l1 or l2')
 parser.add_argument('--mesh1', default='m1', help='for mesh interpolation')
 parser.add_argument('--mesh2', default='m1', help='for mesh interpolation')
 
-
 args = parser.parse_args()
 
 np.random.seed(args.seed)
 nz = args.nz
 print("Loading data .. ")
 reference_mesh_file = 'data/template.obj'
-facedata = FaceData(nVal=100, train_file=args.data+'/train.npy',
-    test_file=args.data+'/test.npy', reference_mesh_file=reference_mesh_file, pca_n_comp=nz)
+facedata = FaceData(nVal=100, train_file=args.data + '/train.npy',
+                    test_file=args.data + '/test.npy', reference_mesh_file=reference_mesh_file, pca_n_comp=nz)
 
-ds_factors = [4,4,4,4]	# Sampling factor of the mesh at each stage of sampling
+ds_factors = [4, 4, 4, 4]  # Sampling factor of the mesh at each stage of sampling
 print("Generating Transform Matrices ..")
 
 # Generates adjecency matrices A, downsampling matrices D, and upsamling matrices U by sampling
 # the mesh 4 times. Each time the mesh is sampled by a factor of 4
 
-M,A,D,U = mesh_sampling.generate_transform_matrices(facedata.reference_mesh, ds_factors)
+M, A, D, U = mesh_sampling.generate_transform_matrices(facedata.reference_mesh, ds_factors)
 
-A = map(lambda x:x.astype('float32'), A)
-D = map(lambda x:x.astype('float32'), D)
-U = map(lambda x:x.astype('float32'), U)
-p = map(lambda x:x.shape[0], A)
+A = list(map(lambda x: x.astype('float32'), A))
+D = list(map(lambda x: x.astype('float32'), D))
+U = list(map(lambda x: x.astype('float32'), U))
+p = list(map(lambda x: x.shape[0], A))
 
 X_train = facedata.vertices_train.astype('float32')
 X_val = facedata.vertices_val.astype('float32')
@@ -60,33 +59,32 @@ L = [graph.laplacian(a, normalized=True) for a in A]
 
 n_train = X_train.shape[0]
 params = dict()
-params['dir_name']       = args.name
-params['num_epochs']     = args.num_epochs
-params['batch_size']     = args.batch_size
+params['dir_name'] = args.name
+params['num_epochs'] = args.num_epochs
+params['batch_size'] = args.batch_size
 params['eval_frequency'] = args.eval_frequency
 # Building blocks.
-params['filter']         = args.filter
-params['brelu']          = 'b1relu'
-params['pool']           = 'poolwT'
-params['unpool']		 = 'poolwT'
-
+params['filter'] = args.filter
+params['brelu'] = 'b1relu'
+params['pool'] = 'poolwT'
+params['unpool'] = 'poolwT'
 
 # Architecture.
-params['F_0']            = int(X_train.shape[2])  # Number of graph input features.
-params['F']              = [16, 16, 16, 32]  # Number of graph convolutional filters.
-params['K']              = [6, 6, 6, 6]  # Polynomial orders.
-params['p']              = p #[4, 4, 4, 4]    # Pooling sizes.
-params['nz']              = [nz]  # Output dimensionality of fully connected layers.
+params['F_0'] = int(X_train.shape[2])  # Number of graph input features.
+params['F'] = [16, 16, 16, 32]  # Number of graph convolutional filters.
+params['K'] = [6, 6, 6, 6]  # Polynomial orders.
+params['p'] = p  # [4, 4, 4, 4]    # Pooling sizes.
+params['nz'] = [nz]  # Output dimensionality of fully connected layers.
 
 # Optimization.
-params['which_loss']     = args.loss
-params['nv']             = facedata.n_vertex
+params['which_loss'] = args.loss
+params['nv'] = facedata.n_vertex
 params['regularization'] = 5e-4
-params['dropout']        = 1
-params['learning_rate']  = args.lr
-params['decay_rate']     = 0.99
-params['momentum']       = 0.9
-params['decay_steps']    = n_train / params['batch_size']
+params['dropout'] = 1
+params['learning_rate'] = args.lr
+params['decay_rate'] = 0.99
+params['momentum'] = 0.9
+params['decay_steps'] = n_train / params['batch_size']
 
 model = models.coma(L=L, D=D, U=U, **params)
 
@@ -95,25 +93,26 @@ if args.mode in ['test']:
         os.makedirs('results')
     predictions, loss = model.predict(X_test, X_test)
     print("L1 Loss= ", loss)
-    euclidean_loss = np.mean(np.sqrt(np.sum((facedata.std*(predictions-facedata.vertices_test))**2, axis=2)))
+    euclidean_loss = np.mean(np.sqrt(np.sum((facedata.std * (predictions - facedata.vertices_test)) ** 2, axis=2)))
     print("Euclidean loss= ", euclidean_loss)
-    np.save('results/'+args.name+'_predictions', predictions)
+    np.save('results/' + args.name + '_predictions', predictions)
     if args.viz:
         from psbody.mesh import MeshViewers
+
         viewer_recon = MeshViewers(window_width=800, window_height=1000, shape=[5, 4], titlebar='Mesh Reconstructions')
-        for i in range(predictions.shape[0]/20):
-            facedata.show_mesh(viewer=viewer_recon, mesh_vecs=predictions_unperm[i*20:(i+1)*20], figsize=(5,4))
+        for i in range(predictions.shape[0] / 20):
+            facedata.show_mesh(viewer=viewer_recon, mesh_vecs=predictions_unperm[i * 20:(i + 1) * 20], figsize=(5, 4))
             time.sleep(0.1)
 elif args.mode in ['sample']:
-	meshes = facedata.get_normalized_meshes(args.mesh1, args.mesh2)
-	features = model.encode(meshes)
+    meshes = facedata.get_normalized_meshes(args.mesh1, args.mesh2)
+    features = model.encode(meshes)
 elif args.mode in ['latent']:
     visualize_latent_space(model, facedata)
 else:
-	if not os.path.exists(os.path.join('checkpoints', args.name)):
-	    os.makedirs(os.path.join('checkpoints', args.name))
-	with open(os.path.join('checkpoints', args.name +'params.json'),'w') as fp:
-		saveparams = copy.deepcopy(params)
-		saveparams['seed'] = args.seed
-		json.dump(saveparams, fp)
-	loss, t_step = model.fit(X_train, X_train, X_val, X_val)
+    if not os.path.exists(os.path.join('checkpoints', args.name)):
+        os.makedirs(os.path.join('checkpoints', args.name))
+    with open(os.path.join('checkpoints', args.name + 'params.json'), 'w') as fp:
+        saveparams = copy.deepcopy(params)
+        saveparams['seed'] = args.seed
+        json.dump(saveparams, fp)
+    loss, t_step = model.fit(X_train, X_train, X_val, X_val)
