@@ -62,4 +62,4 @@ The code contained in this repository is under MIT License and is free for comme
 
 ## When using this code, please cite
 
-Anurag Ranjan, Timo Bolkart, Soubhik Sanyal, and Michael J. Black. "Generating 3D faces using Convolutional Mesh Autoencoders." ECCV 2018.
+Anurag Ranjan, Timo Bolkart, Soubhik Sanyal, and Michael J. Black. "Generating 3D faces using Convolutional Mesh Autoencoders." European Conference on Computer Vision (ECCV) 2018.
