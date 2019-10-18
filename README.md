@@ -4,7 +4,7 @@
 
 This is an official repository of [Generating 3D Faces using Convolutional Mesh Autoencoders](https://coma.is.tue.mpg.de)
 
-[[Project Page](https://coma.is.tue.mpg.de)][[Arxiv](https://arxiv.org/abs/1807.10267)]
+[[Project Page](https://coma.is.tue.mpg.de)][[Arxiv](https://arxiv.org/abs/1807.10267)][[Pytorch version](https://github.com/pixelite1201/pytorch_coma/)]
 
 ## Requirements
 This code is tested on Tensorflow 1.3. Requirements (including tensorflow) can be installed using:
