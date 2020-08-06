@@ -64,6 +64,10 @@ We thank [Raffi Enficiaud](https://www.is.mpg.de/person/renficiaud) and [Ahmed O
 ## License
 The code contained in this repository is under MIT License and is free for commercial and non-commercial purposes. The dependencies, in particular, [MPI-IS/mesh](https://github.com/MPI-IS/mesh) and our [data](https://coma.is.tue.mpg.de) have their own license terms which can be found on their respective webpages. The dependencies and data are NOT covered by MIT License associated with this repository.
 
+## Related projects
+
+[CAPE (CVPR 2020)](https://github.com/QianliM/CAPE): Based on CoMA, we build a conditional Mesh-VAE-GAN to learn the clothing deformation from the SMPL body model, making a generative, animatable model of people in clothing. A large-scale mesh dataset of clothed humans in motion is also included!
+
 ## When using this code, please cite
 
 Anurag Ranjan, Timo Bolkart, Soubhik Sanyal, and Michael J. Black. "Generating 3D faces using Convolutional Mesh Autoencoders." European Conference on Computer Vision (ECCV) 2018.
